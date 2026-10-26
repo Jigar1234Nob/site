@@ -15,6 +15,7 @@ if(galleryRoot){
  const search=galleryRoot.querySelector("#project-search");
  const categorySelect=galleryRoot.querySelector("#project-category");
  const sortSelect=galleryRoot.querySelector("#project-sort");
+ const statusSelect=galleryRoot.querySelector("#project-status-filter");
  const chips=[...galleryRoot.querySelectorAll("[data-filter-chip]")];
  const grid=galleryRoot.querySelector("#project-grid");
  const count=galleryRoot.querySelector("#project-count");
@@ -24,10 +25,11 @@ if(galleryRoot){
   const term=(search?.value||"").trim().toLowerCase();
   const selected=categorySelect?.value||"All";
   const category=selected!=="All"?selected:activeCategory;
+  const status=statusSelect?.value||"All";
   let visible=cards.filter(card=>{
    const text=(card.dataset.search||card.textContent).toLowerCase();
    const categories=(card.dataset.category||"").split("|");
-   return (!term||text.includes(term))&&(category==="All"||categories.includes(category));
+   return (!term||text.includes(term))&&(category==="All"||categories.includes(category))&&(status==="All"||card.dataset.status===status);
   });
   if(sortSelect?.value==="az")visible.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title));
   if(sortSelect?.value==="za")visible.sort((a,b)=>b.dataset.title.localeCompare(a.dataset.title));
@@ -40,6 +42,7 @@ if(galleryRoot){
  search?.addEventListener("input",renderGallery);
  categorySelect?.addEventListener("change",()=>{activeCategory="All";renderGallery()});
  sortSelect?.addEventListener("change",renderGallery);
+ statusSelect?.addEventListener("change",renderGallery);
  chips.forEach(chip=>chip.addEventListener("click",()=>{activeCategory=chip.dataset.filterChip; if(categorySelect)categorySelect.value="All";renderGallery()}));
  renderGallery();
 }
