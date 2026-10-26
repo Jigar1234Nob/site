@@ -1,6 +1,17 @@
-# Jigar Rai Portfolio
+# Jigar Rai — Portfolio
 
-A responsive personal portfolio for Jigar Rai, built with plain HTML, CSS and JavaScript. Website source lives in `/docs` for GitHub Pages.
+A responsive personal portfolio built with plain HTML, CSS and JavaScript. All GitHub Pages site files live in `/docs`.
+
+## Design features
+
+- Apple-inspired developer portfolio with black, electric-blue and cyan accents
+- Responsive layout and mobile navigation
+- Light/dark theme toggle (remembers the selection when browser storage is available)
+- Filterable project gallery
+- Interactive, read-only portfolio terminal
+- Subtle scroll reveals, ambient background and custom pointer effect on supported desktop devices
+- Reduced-motion support, keyboard focus styles, skip link and semantic controls
+- No framework, build step, or server-side code required
 
 ## Publish with GitHub Pages
 
@@ -9,17 +20,18 @@ A responsive personal portfolio for Jigar Rai, built with plain HTML, CSS and Ja
 3. Select branch `main` and folder `/docs`, then save.
 4. Wait for GitHub Pages to publish the site.
 
-## Customise
+## Update the site
 
-- Edit `docs/index.html` to update the bio, projects and links.
-- Edit `docs/style.css` to adjust colours and layout.
-- Edit `docs/script.js` for interactions.
-- Replace project links or add real artwork and screenshots as your portfolio grows.
+- `docs/index.html`: copy, project descriptions, navigation and links
+- `docs/style.css`: visual design, responsive layouts, theme variables and animation
+- `docs/script.js`: theme, filters, terminal commands and interactions
+- `docs/assets/favicon.svg`: site icon
 
 ## Featured projects
 
-- SPCITCLUB Minecraft Server
-- Websites and app experiments
-- Home lab, Linux, virtualisation and Docker experiments
+- **JPN** — personal web platform project: https://jigar1234nob.github.io/JPN/
+- **SPCITCLUB Minecraft Server** — community project: https://spcitclub.me
+- Websites and app experiments — https://github.com/Jigar1234Nob
+- Home lab and OS experiments — https://github.com/Jigar1234Nob
 
-The contact section links to the public GitHub profile.
+Project descriptions intentionally reflect ongoing work and do not claim unverified awards, metrics, or achievements.
