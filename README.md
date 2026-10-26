@@ -1,6 +1,6 @@
 # Jigar Rai — Portfolio
 
-A responsive personal portfolio built with plain HTML, CSS and JavaScript. All GitHub Pages site files live in `/docs`.
+A responsive personal portfolio covering music, coding, IT support and technology, built with plain HTML, CSS and JavaScript. All GitHub Pages site files live in `/docs`.
 
 ## Design features
 
@@ -29,7 +29,7 @@ A responsive personal portfolio built with plain HTML, CSS and JavaScript. All G
 
 ## Featured projects
 
-- **JPN** — personal web platform project: https://jigar1234nob.github.io/JPN/
+- **Music** — Spotify artist profile: https://open.spotify.com/artist/1ihmgGU9tknCs3DzSl9rHp\n- **JPN** — personal web platform project: https://jigar1234nob.github.io/JPN/
 - **SPCITCLUB Minecraft Server** — community project: https://spcitclub.me
 - Websites and app experiments — https://github.com/Jigar1234Nob
 - Home lab and OS experiments — https://github.com/Jigar1234Nob
