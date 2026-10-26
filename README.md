@@ -1,17 +1,19 @@
-# Jigar Rai — Portfolio
+# Jigar Rai — Australian Artist & Technologist
 
-A responsive personal portfolio covering music, coding, IT support and technology, built with plain HTML, CSS and JavaScript. All GitHub Pages site files live in `/docs`.
+A responsive personal portfolio built with plain HTML, CSS and JavaScript. It brings together Jigar's music, software and web projects, IT interests, community work and home lab experiments. GitHub Pages serves the site from `/docs`.
 
-## Design features
+## Design and features
 
-- Apple-inspired developer portfolio with black, electric-blue and cyan accents
-- Responsive layout and mobile navigation
-- Light/dark theme toggle (remembers the selection when browser storage is available)
-- Filterable project gallery
-- Interactive, read-only portfolio terminal
-- Subtle scroll reveals, ambient background and custom pointer effect on supported desktop devices
-- Reduced-motion support, keyboard focus styles, skip link and semantic controls
-- No framework, build step, or server-side code required
+- Apple-inspired editorial layout with restrained typography, translucent navigation and generous full-width feature panels
+- System font stack, including Apple's San Francisco fonts when available on Apple devices; no proprietary font files are redistributed
+- Responsive mobile navigation and light/dark appearance toggle
+- Original CSS artwork for music, JPN, Minecraft, code and home lab projects
+- SVG social icons and direct links for Spotify, YouTube, Twitch and GitHub
+- Explicit Australian identity and location
+- Reduced-motion support, keyboard focus styles and skip link
+- No framework, build step or server-side code
+
+The visual direction takes inspiration from Apple's clean product storytelling, but the content, illustrations and branding are original to this portfolio rather than a pixel-for-pixel copy of Apple.com.
 
 ## Publish with GitHub Pages
 
@@ -20,18 +22,21 @@ A responsive personal portfolio covering music, coding, IT support and technolog
 3. Select branch `main` and folder `/docs`, then save.
 4. Wait for GitHub Pages to publish the site.
 
-## Update the site
+## Main files
 
-- `docs/index.html`: copy, project descriptions, navigation and links
-- `docs/style.css`: visual design, responsive layouts, theme variables and animation
-- `docs/script.js`: theme, filters, terminal commands and interactions
+- `docs/index.html`: content, projects, navigation and social links
+- `docs/style.css`: visual design, responsive layouts, themes and animations
+- `docs/script.js`: theme, mobile navigation and current-year footer
 - `docs/assets/favicon.svg`: site icon
 
-## Featured projects
+## Projects and profiles
 
-- **Music** — Spotify artist profile: https://open.spotify.com/artist/1ihmgGU9tknCs3DzSl9rHp\n- **JPN** — personal web platform project: https://jigar1234nob.github.io/JPN/
-- **SPCITCLUB Minecraft Server** — community project: https://spcitclub.me
-- Websites and app experiments — https://github.com/Jigar1234Nob
-- Home lab and OS experiments — https://github.com/Jigar1234Nob
+- **Music / Spotify:** https://open.spotify.com/artist/1ihmgGU9tknCs3DzSl9rHp
+- **YouTube:** https://www.youtube.com/@VersatileFoundation
+- **Twitch:** https://twitch.tv/versatilefoundation
+- **JPN:** https://jigar1234nob.github.io/JPN/
+- **SPCITCLUB Minecraft Server:** https://spcitclub.me
+- **SPCITCLUB Discord:** https://discord.gg/spcitclubmc
+- **GitHub projects:** https://github.com/Jigar1234Nob
 
-Project descriptions intentionally reflect ongoing work and do not claim unverified awards, metrics, or achievements.
+Descriptions reflect ongoing work and do not claim unverified awards, metrics or achievements.
