@@ -56,9 +56,9 @@
 
   const commandOutput = document.querySelector("#terminal-output");
   const commands = {
-    about: ["whoami", ["I'm Jigar Rai.", "I enjoy creative work, coding, IT support and exploring technology."]],
-    interests: ["interests", ["Art and design", "Websites and apps", "Troubleshooting and IT", "Servers, Linux, Docker and hardware experiments"]],
-    projects: ["projects", ["JPN — personal web platform", "SPCITCLUB Minecraft Server — community project", "Web and app experiments", "Home lab and OS experiments"]],
+    about: ["whoami", ["I'm Jigar Rai.", "I make music, build projects, explore technology and learn by doing."]],
+    interests: ["interests", ["Music and artist releases", "Websites and apps", "Troubleshooting and IT", "Servers, Linux, Docker and hardware experiments"]],
+    projects: ["projects", ["JPN — personal web platform", "SPCITCLUB Minecraft Server — community project", "Web and app experiments", "Home lab and OS experiments", "My music — Spotify artist profile"]],
     help: ["help", ["Available commands: whoami, interests, projects, help"]]
   };
   document.querySelectorAll("[data-command]").forEach(button => button.addEventListener("click", () => {
