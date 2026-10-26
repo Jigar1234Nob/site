@@ -15,3 +15,48 @@ html[data-theme="dark"] .hero-art{background:linear-gradient(#111d2b,#101d31 55%
 @media(max-width:760px){.global-nav{padding:0 22px}.nav-toggle{display:block}.nav-links{display:none;position:absolute;top:48px;left:0;right:0;height:auto;padding:18px 24px 24px;background:var(--page);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:18px}.nav-links.is-open{display:flex}.nav-links>a{font-size:15px}.theme-toggle{justify-content:start;width:auto}.hero{min-height:650px}.hero-copy{padding-top:58px}.hero h1,.hero h2{font-size:clamp(42px,9vw,66px)}.lead{font-size:17px}.hero-art{inset:330px 0 0}.music-art{inset:320px 0 0}.feature-grid{grid-template-columns:1fr;padding:0 8px;gap:8px}.feature{min-height:640px}.feature-copy{padding-top:48px}.feature-copy h2{font-size:clamp(36px,8vw,46px)}.artwork{inset:280px 0 0}.about{padding:75px 22px}.columns{grid-template-columns:1fr;gap:17px}.about h2,.connect h2{font-size:clamp(38px,8vw,56px)}.connect{padding:75px 20px}.social-grid{grid-template-columns:1fr;gap:9px}.footer-top,.footer-bottom{align-items:flex-start;flex-direction:column}.footer-bottom span:last-child{text-align:left}.footer{padding:23px 22px}.footer-top{gap:13px}}
 @media(max-width:420px){.hero{min-height:630px}.hero-copy{padding-top:46px}.hero h1,.hero h2{font-size:42px}.lead{font-size:16px}.links{gap:16px}.links a{font-size:14px}.hero-art{inset:320px 0 0}.music-art{inset:310px 0 0}.feature{min-height:620px}.feature-copy p:not(.kicker){font-size:14px}.artwork{inset:290px 0 0}.social-card{padding:17px;gap:12px}.social-icon{width:39px;height:39px}.social-card small{font-size:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Responsive layout refinements: keep headings, copy and artwork inside their panels. */
+img,svg,video,canvas{max-width:100%}
+body{overflow-wrap:break-word}
+main,section,article,header,footer{min-width:0}
+.hero-copy,.feature-copy,.about-inner,.connect{min-width:0}
+.hero h1,.hero h2,.feature-copy h2,.about h2,.connect h2{max-width:100%;text-wrap:balance}
+.feature-copy p:not(.kicker),.lead,.connect-lead,.columns p{overflow-wrap:anywhere}
+.feature-copy .links{padding-inline:4px}
+.community-title{font-size:clamp(27px,3.4vw,43px)!important;line-height:1.08;letter-spacing:-.055em}
+.feature{isolation:isolate}
+.artwork{width:100%;max-width:100%}
+.social-card{min-width:0}
+.social-card>span:nth-child(2){min-width:0}
+.social-card small{overflow-wrap:anywhere}
+.footer-top>span,.footer-bottom span{overflow-wrap:anywhere}
+@media(min-width:761px) and (max-width:1050px){
+ .global-nav{padding-inline:24px}
+ .nav-links{gap:20px}
+ .feature{min-height:660px}
+ .feature-copy{width:calc(100% - 34px)}
+ .feature-copy p:not(.kicker){font-size:15px}
+ .artwork{inset-block-start:315px}
+}
+@media(max-width:760px){
+ .community-title{font-size:clamp(30px,7.4vw,42px)!important}
+ .feature-copy{width:calc(100% - 32px)}
+ .feature-copy .links{column-gap:15px;row-gap:8px}
+ .feature-copy .links a{font-size:13px}
+ .columns{min-width:0}
+}
+@media(max-width:380px){
+ .global-nav{padding-inline:16px}
+ .hero-copy{width:calc(100% - 30px)}
+ .hero h1,.hero h2{font-size:clamp(35px,10vw,42px)}
+ .feature{min-height:650px}
+ .feature-copy h2{font-size:34px}
+ .community-title{font-size:30px!important}
+ .artwork{inset-block-start:315px}
+ .social-card{padding:14px 12px;gap:10px}
+ .social-card b{font-size:15px}
+ .social-card small{font-size:11px}
+ .footer{padding-inline:16px}
+}
