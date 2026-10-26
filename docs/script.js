@@ -9,3 +9,37 @@ toggle?.addEventListener("click",()=>{const open=nav?.classList.toggle("is-open"
 nav?.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));window.addEventListener("resize",()=>{if(innerWidth>760)closeMenu()});
 const year=document.querySelector("#year");if(year)year.textContent=new Date().getFullYear();
 })();
+const galleryRoot=document.querySelector("[data-project-gallery]");
+if(galleryRoot){
+ const cards=[...galleryRoot.querySelectorAll(".project-card")];
+ const search=galleryRoot.querySelector("#project-search");
+ const categorySelect=galleryRoot.querySelector("#project-category");
+ const sortSelect=galleryRoot.querySelector("#project-sort");
+ const chips=[...galleryRoot.querySelectorAll("[data-filter-chip]")];
+ const grid=galleryRoot.querySelector("#project-grid");
+ const count=galleryRoot.querySelector("#project-count");
+ const empty=galleryRoot.querySelector("#project-empty");
+ let activeCategory="All";
+ function renderGallery(){
+  const term=(search?.value||"").trim().toLowerCase();
+  const selected=categorySelect?.value||"All";
+  const category=selected!=="All"?selected:activeCategory;
+  let visible=cards.filter(card=>{
+   const text=(card.dataset.search||card.textContent).toLowerCase();
+   const categories=(card.dataset.category||"").split("|");
+   return (!term||text.includes(term))&&(category==="All"||categories.includes(category));
+  });
+  if(sortSelect?.value==="az")visible.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title));
+  if(sortSelect?.value==="za")visible.sort((a,b)=>b.dataset.title.localeCompare(a.dataset.title));
+  cards.forEach(card=>card.hidden=true);
+  visible.forEach(card=>{card.hidden=false;grid.appendChild(card)});
+  if(count)count.textContent=String(visible.length);
+  if(empty)empty.hidden=visible.length>0;
+  chips.forEach(chip=>chip.setAttribute("aria-pressed",String(chip.dataset.filterChip===category)));
+ }
+ search?.addEventListener("input",renderGallery);
+ categorySelect?.addEventListener("change",()=>{activeCategory="All";renderGallery()});
+ sortSelect?.addEventListener("change",renderGallery);
+ chips.forEach(chip=>chip.addEventListener("click",()=>{activeCategory=chip.dataset.filterChip; if(categorySelect)categorySelect.value="All";renderGallery()}));
+ renderGallery();
+}
