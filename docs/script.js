@@ -46,3 +46,36 @@ if(galleryRoot){
  chips.forEach(chip=>chip.addEventListener("click",()=>{activeCategory=chip.dataset.filterChip; if(categorySelect)categorySelect.value="All";renderGallery()}));
  renderGallery();
 }
+
+
+// Small, transparent cookie notice. This site does not load analytics or advertising cookies.
+(() => {
+  const noticeCookie = "jigar_cookie_notice";
+  const hasSeenNotice = () => document.cookie.split(";").some(item => item.trim().startsWith(noticeCookie + "="));
+  const saveNoticeChoice = () => {
+    document.cookie = noticeCookie + "=seen; Max-Age=15552000; Path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
+  };
+  const notice = document.createElement("aside");
+  notice.className = "cookie-notice";
+  notice.setAttribute("aria-label", "Cookie notice");
+  notice.setAttribute("aria-live", "polite");
+  notice.hidden = hasSeenNotice();
+  notice.innerHTML = '<div class="cookie-notice-copy"><strong>Cookies, minus the creepy stuff.</strong><p>This site uses essential browser storage to remember your theme and this notice. No analytics or advertising cookies are used.</p></div><button type="button" class="cookie-notice-dismiss">Got it</button>';
+  document.body.appendChild(notice);
+  const dismiss = () => {
+    saveNoticeChoice();
+    notice.hidden = true;
+  };
+  notice.querySelector(".cookie-notice-dismiss").addEventListener("click", dismiss);
+  document.querySelectorAll(".footer-bottom").forEach(footer => {
+    const link = document.createElement("button");
+    link.type = "button";
+    link.className = "cookie-notice-link";
+    link.textContent = "Cookie notice";
+    link.addEventListener("click", () => {
+      notice.hidden = false;
+      notice.querySelector(".cookie-notice-dismiss").focus();
+    });
+    footer.appendChild(link);
+  });
+})();
