@@ -1,81 +1,76 @@
 (() => {
-const root=document.documentElement,theme=document.querySelector(".theme-toggle"),saved=(()=>{try{return localStorage.getItem("jigar-theme")}catch{return null}})(),dark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
-function setTheme(value){root.dataset.theme=value;if(theme)theme.setAttribute("aria-label",value==="dark"?"Switch to light mode":"Switch to dark mode");const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=value==="dark"?"#000000":"#f5f5f7"}
-setTheme(saved==="light"||saved==="dark"?saved:(dark?"dark":"light"));
-theme?.addEventListener("click",()=>{const next=root.dataset.theme==="dark"?"light":"dark";setTheme(next);try{localStorage.setItem("jigar-theme",next)}catch{}});
-const toggle=document.querySelector(".nav-toggle"),nav=document.querySelector(".nav-links");
-function closeMenu(){nav?.classList.remove("is-open");toggle?.setAttribute("aria-expanded","false");toggle?.setAttribute("aria-label","Open menu")}
-toggle?.addEventListener("click",()=>{const open=nav?.classList.toggle("is-open")??false;toggle.setAttribute("aria-expanded",String(open));toggle.setAttribute("aria-label",open?"Close menu":"Open menu")});
-nav?.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));window.addEventListener("resize",()=>{if(innerWidth>760)closeMenu()});
-const year=document.querySelector("#year");if(year)year.textContent=new Date().getFullYear();
-})();
-const galleryRoot=document.querySelector("[data-project-gallery]");
-if(galleryRoot){
- const cards=[...galleryRoot.querySelectorAll(".project-card")];
- const search=galleryRoot.querySelector("#project-search");
- const categorySelect=galleryRoot.querySelector("#project-category");
- const sortSelect=galleryRoot.querySelector("#project-sort");
- const statusSelect=galleryRoot.querySelector("#project-status-filter");
- const chips=[...galleryRoot.querySelectorAll("[data-filter-chip]")];
- const grid=galleryRoot.querySelector("#project-grid");
- const count=galleryRoot.querySelector("#project-count");
- const empty=galleryRoot.querySelector("#project-empty");
- let activeCategory="All";
- function renderGallery(){
-  const term=(search?.value||"").trim().toLowerCase();
-  const selected=categorySelect?.value||"All";
-  const category=selected!=="All"?selected:activeCategory;
-  const status=statusSelect?.value||"All";
-  let visible=cards.filter(card=>{
-   const text=(card.dataset.search||card.textContent).toLowerCase();
-   const categories=(card.dataset.category||"").split("|");
-   return (!term||text.includes(term))&&(category==="All"||categories.includes(category))&&(status==="All"||card.dataset.status===status);
+  const root = document.documentElement;
+  const themeButton = document.querySelector(".theme-toggle");
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem("jigar-theme"); } catch {}
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  function setTheme(value) {
+    root.dataset.theme = value;
+    if (themeButton) {
+      themeButton.setAttribute("aria-label", value === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      const icon = themeButton.querySelector(".theme-icon");
+      if (icon) icon.textContent = value === "dark" ? "☼" : "◐";
+    }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = value === "dark" ? "#0b1220" : "#f5f7fb";
+  }
+  setTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : (prefersDark ? "dark" : "light"));
+  themeButton?.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    try { localStorage.setItem("jigar-theme", next); } catch {}
   });
-  if(sortSelect?.value==="az")visible.sort((a,b)=>a.dataset.title.localeCompare(b.dataset.title));
-  if(sortSelect?.value==="za")visible.sort((a,b)=>b.dataset.title.localeCompare(a.dataset.title));
-  cards.forEach(card=>card.hidden=true);
-  visible.forEach(card=>{card.hidden=false;grid.appendChild(card)});
-  if(count)count.textContent=String(visible.length);
-  if(empty)empty.hidden=visible.length>0;
-  chips.forEach(chip=>chip.setAttribute("aria-pressed",String(chip.dataset.filterChip===category)));
- }
- search?.addEventListener("input",renderGallery);
- categorySelect?.addEventListener("change",()=>{activeCategory="All";renderGallery()});
- sortSelect?.addEventListener("change",renderGallery);
- statusSelect?.addEventListener("change",renderGallery);
- chips.forEach(chip=>chip.addEventListener("click",()=>{activeCategory=chip.dataset.filterChip; if(categorySelect)categorySelect.value="All";renderGallery()}));
- renderGallery();
-}
 
+  const navToggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".nav-links");
+  function closeNav() {
+    nav?.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+    navToggle?.setAttribute("aria-label", "Open navigation");
+  }
+  navToggle?.addEventListener("click", () => {
+    const isOpen = nav?.classList.toggle("is-open") ?? false;
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+  nav?.querySelectorAll("a").forEach(link => link.addEventListener("click", closeNav));
+  window.addEventListener("resize", () => { if (window.innerWidth > 760) closeNav(); });
+  const year = document.querySelector("#year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
-// Small, transparent cookie notice. This site does not load analytics or advertising cookies.
-(() => {
-  const noticeCookie = "jigar_cookie_notice";
-  const hasSeenNotice = () => document.cookie.split(";").some(item => item.trim().startsWith(noticeCookie + "="));
-  const saveNoticeChoice = () => {
-    document.cookie = noticeCookie + "=seen; Max-Age=15552000; Path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
-  };
+  const resourceSearch = document.querySelector("#resource-search");
+  const resourceCards = [...document.querySelectorAll(".resource-card")];
+  const resourceCount = document.querySelector("#resource-count");
+  function filterResources() {
+    const term = (resourceSearch?.value || "").trim().toLowerCase();
+    let shown = 0;
+    resourceCards.forEach(card => {
+      const searchable = ((card.dataset.search || "") + " " + card.textContent).toLowerCase();
+      const visible = !term || searchable.includes(term);
+      card.hidden = !visible;
+      if (visible) shown++;
+    });
+    if (resourceCount) resourceCount.textContent = String(shown);
+  }
+  resourceSearch?.addEventListener("input", filterResources);
+  filterResources();
+
+  // This site does not load analytics or advertising cookies.
+  const cookieName = "jigar_cookie_notice";
+  const noticeAlreadySeen = () => document.cookie.split(";").some(item => item.trim().startsWith(cookieName + "="));
   const notice = document.createElement("aside");
   notice.className = "cookie-notice";
   notice.setAttribute("aria-label", "Cookie notice");
-  notice.setAttribute("aria-live", "polite");
-  notice.hidden = hasSeenNotice();
-  notice.innerHTML = '<div class="cookie-notice-copy"><strong>Cookies, minus the creepy stuff.</strong><p>This site uses essential browser storage to remember your theme and this notice. No analytics or advertising cookies are used.</p></div><button type="button" class="cookie-notice-dismiss">Got it</button>';
+  notice.innerHTML = '<div class="cookie-notice-copy"><strong>Cookies, without the creepy stuff.</strong><p>This site uses browser storage to remember your theme and a small cookie to remember this notice. No analytics or advertising cookies are used.</p></div><button type="button" class="cookie-notice-dismiss">Got it</button>';
+  notice.hidden = noticeAlreadySeen();
   document.body.appendChild(notice);
   const dismiss = () => {
-    saveNoticeChoice();
+    document.cookie = cookieName + "=seen; Max-Age=15552000; Path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
     notice.hidden = true;
   };
   notice.querySelector(".cookie-notice-dismiss").addEventListener("click", dismiss);
-  document.querySelectorAll(".footer-bottom").forEach(footer => {
-    const link = document.createElement("button");
-    link.type = "button";
-    link.className = "cookie-notice-link";
-    link.textContent = "Cookie notice";
-    link.addEventListener("click", () => {
-      notice.hidden = false;
-      notice.querySelector(".cookie-notice-dismiss").focus();
-    });
-    footer.appendChild(link);
-  });
+  document.querySelectorAll(".cookie-notice-link").forEach(link => link.addEventListener("click", () => {
+    notice.hidden = false;
+    notice.querySelector(".cookie-notice-dismiss").focus();
+  }));
 })();
