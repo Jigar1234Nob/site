@@ -244,3 +244,16 @@ html[data-theme="dark"] .rack-glow{background:radial-gradient(circle,#bd28602b,t
 @media(max-width:520px){.project-grid{grid-template-columns:1fr}.project-visual{height:160px}.project-card-content{padding:19px}.project-card h2{font-size:22px}.project-card p{font-size:13px}.gallery-hero{padding-inline:18px}.gallery-results{align-items:flex-start;flex-direction:column;gap:5px}.gallery-callout{padding-inline:18px}}
 @media(max-width:360px){.gallery-wrap{padding-inline:11px}.gallery-hero h1{font-size:40px}.filter-chip{padding:7px 10px;font-size:11px}.brand{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.project-card,.gallery-button,.filter-chip,.brand{transition:none!important}}
+
+
+/* Cookie notice */
+.cookie-notice{position:fixed;z-index:100;left:20px;right:20px;bottom:20px;width:min(700px,calc(100% - 40px));margin-left:auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 22px;border:1px solid var(--line);border-radius:20px;background:color-mix(in srgb,var(--panel) 94%,transparent);color:var(--text);box-shadow:0 18px 60px #0002;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.cookie-notice[hidden]{display:none}
+.cookie-notice-copy{min-width:0}
+.cookie-notice-copy strong{display:block;font-size:14px;letter-spacing:-.02em}
+.cookie-notice-copy p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+.cookie-notice-dismiss{flex:none;border:0;border-radius:999px;background:var(--blue);color:#fff;padding:10px 16px;font-size:12px;font-weight:650;cursor:pointer}
+.cookie-notice-dismiss:hover{filter:brightness(1.08)}
+.cookie-notice-link{border:0;background:none;color:var(--muted);font:inherit;font-size:10px;cursor:pointer;padding:0}
+.cookie-notice-link:hover{color:var(--blue);text-decoration:underline}
+@media(max-width:560px){.cookie-notice{left:12px;right:12px;bottom:12px;width:auto;gap:14px;padding:16px;border-radius:16px;align-items:flex-start}.cookie-notice-copy p{font-size:11px}.cookie-notice-dismiss{padding:9px 12px;margin-top:1px}}
