@@ -51,3 +51,23 @@ These values are intended for browser use. RLS is mandatory. Never put a databas
 - Audit-log writes should be performed by trusted server-side code, not directly by the browser.
 - Add CAPTCHA / Turnstile and rate limiting before opening public forms to reduce spam.
 - Configure Auth email templates, redirect URLs, and SMTP before relying on account verification or password resets.
+
+
+## Website account pages
+
+The static website now includes:
+
+- `/account/`: sign-in, registration, password-reset request, password update, and sign-out.
+- `/admin/`: a staff-role gate for the future management dashboard.
+- Browser code uses the Supabase project URL and publishable key from `docs/assets/js/supabase-client.js` only.
+
+Before testing the website account page, configure the standalone Supabase project's Authentication settings:
+
+1. Open **Authentication → URL Configuration**.
+2. Set **Site URL** to `https://jigar.au`.
+3. Add `https://jigar.au/account/` to the allowed redirect URLs. If the www hostname is actively used, also add `https://www.jigar.au/account/`.
+4. Under **Authentication → Providers → Email**, enable email/password sign-in. Keep email confirmation enabled for public registration.
+5. Configure a working SMTP provider and review the confirmation and password-reset email templates before relying on them in production.
+6. Apply the SQL migration before testing staff roles or the admin route. Without the migration, authentication itself may work, but the profile/role database features will not.
+
+Public registration does not grant staff access. The first administrator must still be assigned manually using the SQL instructions above.
