@@ -84,14 +84,15 @@ Public registration does not grant staff access. The first administrator must st
 
 ## Deploy the protected Auth management function
 
-From the repository root, with the Supabase CLI installed:
+From the repository root, with Node.js 20+ and the Supabase CLI available, run:
 
-```sh
-supabase link --project-ref kvltejnjvpzkyynlzyaa
-supabase functions deploy admin-users
+```powershell
+npx supabase@latest login
+npx supabase@latest link --project-ref kvltejnjvpzkyynlzyaa
+npx supabase@latest functions deploy admin-users
 ```
 
-The function uses the Supabase server environment and a server-side service-role key. If the project requires you to set it explicitly, use the Supabase dashboard's Edge Function secrets interface. Never put that key in this repository or the website. The function checks the caller's JWT and requires the `admin` role before it lists, disables, enables, or deletes Auth accounts. Account deletion is irreversible.
+The project configuration is in `supabase/config.toml`. Supabase provides the service-role key to Edge Functions as a server-side environment variable. Do not try to add it to browser code, commit it, or expose it. The function checks the caller's JWT and requires the `admin` role before it lists, disables, enables, or deletes Auth accounts. Account deletion is irreversible.
 
 ## Production readiness checklist
 
