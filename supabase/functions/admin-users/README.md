@@ -11,7 +11,7 @@ supabase secrets set SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
 supabase functions deploy admin-users
 ```
 
-The function also reads the project URL and anon key from the Supabase Edge Function environment. Do not commit secrets to this repository or paste them into frontend files.
+Supabase injects `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` into Edge Functions. Do not attempt to set reserved `SUPABASE_` variables as custom secrets. Never commit credentials or paste service-role keys into frontend files.
 
 The function verifies the caller's JWT, checks that the caller has the `admin` role in `public.user_roles`, and only then uses the service-role client. It does not allow an administrator to disable or delete their own account. Account deletion is irreversible and should be used cautiously.
 
