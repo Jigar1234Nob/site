@@ -16,5 +16,27 @@ from public.forms f
 where s.form_id=f.id and (s.assessment_definition='{}'::jsonb or s.assessment_definition is null);
 create index if not exists idx_form_submissions_applicant_email_attempt on public.form_submissions (lower(applicant_email),submitted_at desc);
 create index if not exists idx_form_submissions_assessment_score on public.form_submissions (assessment_score);
+-- Public submissions may only create unreviewed attempts using the exact published form version.
+drop policy if exists "submissions_insert_open_form" on public.form_submissions;
+create policy "submissions_insert_open_form" on public.form_submissions
+for insert to anon, authenticated
+with check (
+  (user_id is null or user_id=(select auth.uid()))
+  and status='new'
+  and reviewed_at is null
+  and reviewed_by is null
+  and internal_notes is null
+  and assessment_score is null
+  and recommended_role is null
+  and assessment_feedback is null
+  and exists (
+    select 1 from public.forms f
+    where f.id=form_id
+      and f.status='open'
+      and (f.allow_anonymous or user_id is not null)
+      and assessment_version=coalesce(nullif(f.definition->>'version','')::integer,1)
+      and assessment_definition=f.definition
+  )
+);
 grant select, update on public.form_submissions to authenticated;
 commit;
