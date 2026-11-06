@@ -14,6 +14,6 @@ npx supabase@latest functions deploy admin-users
 
 Supabase injects `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` into Edge Functions. Do not attempt to set reserved `SUPABASE_` variables as custom secrets. Never commit credentials or paste service-role keys into frontend files.
 
-The function verifies the caller's JWT, checks that the caller has the `admin` role in `public.user_roles`, and only then uses the service-role client. It does not allow an administrator to disable or delete their own account. Account deletion is irreversible and should be used cautiously.
+The function answers CORS OPTIONS requests first, then verifies the caller's user JWT in its own code, checks staff/admin permissions, and only then uses the service-role client. `verify_jwt = false` lets the browser's OPTIONS preflight reach the CORS handler. Every non-OPTIONS action still requires a valid signed-in user session. It does not allow an administrator to disable or delete their own account. Account deletion is irreversible and should be used cautiously.
 
 After deployment, the Admin → People & roles page can load Auth account details and expose disable/enable/delete controls. Until deployment, profile and role management remains available through the database policies, but Auth account controls stay unavailable.
