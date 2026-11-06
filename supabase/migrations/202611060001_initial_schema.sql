@@ -95,6 +95,35 @@ create table if not exists public.audit_logs (
   created_at timestamptz not null default now()
 );
 
+-- Starter staff application. It remains a draft until an administrator opens it.
+insert into public.forms (slug, title, description, status, definition, allow_anonymous)
+values (
+  'jigars-station-staff-application',
+  'Jigar''s Station | Staff Application',
+  'Apply to join the Jigar''s Station team. Choose the roles that match your interests and experience.',
+  'draft',
+  '{
+    "version": 1,
+    "fields": [
+      {"name":"full_name","label":"Full name","type":"text","required":true,"maxLength":120},
+      {"name":"email","label":"Email address","type":"email","required":true},
+      {"name":"discord_username","label":"Discord username","type":"text","required":true,"maxLength":100},
+      {"name":"positions","label":"Which position(s) are you applying for?","type":"multiselect","required":true,"options":["Community Helper","Support Staff","Moderator","Senior Moderator","Project Tester","Community Manager","Administrator"]},
+      {"name":"motivation","label":"Why would you like to join the team?","type":"textarea","required":true,"maxLength":4000},
+      {"name":"experience","label":"Describe any relevant experience, including community support or moderation","type":"textarea","required":true,"maxLength":4000},
+      {"name":"support_scenario","label":"A community member asks for help and you do not know the answer. What would you do?","type":"textarea","required":true,"maxLength":3000},
+      {"name":"moderation_scenario","label":"You see a staff member treating someone unfairly. How would you handle it?","type":"textarea","required":true,"maxLength":3000},
+      {"name":"project_knowledge","label":"What do you know about Jigar''s Station and its projects?","type":"textarea","required":true,"maxLength":3000},
+      {"name":"testing_experience","label":"If applying as Project Tester, explain how you would report a bug clearly","type":"textarea","required":false,"maxLength":3000},
+      {"name":"availability","label":"What days and times are you generally available? Include your timezone","type":"textarea","required":true,"maxLength":1500},
+      {"name":"teamwork","label":"How do you handle disagreements and confidential staff information?","type":"textarea","required":true,"maxLength":3000},
+      {"name":"final_declaration","label":"I confirm that my answers are accurate and I will follow the community and staff rules","type":"checkbox","required":true}
+    ]
+  }'::jsonb,
+  true
+)
+on conflict (slug) do nothing;
+
 create index if not exists idx_user_roles_user_id on public.user_roles(user_id);
 create index if not exists idx_forms_status on public.forms(status);
 create index if not exists idx_form_submissions_form_id on public.form_submissions(form_id);
