@@ -15,7 +15,7 @@ This is a standalone Supabase project for the jigar.au portfolio website. It is 
 
 1. Open the Supabase dashboard for the project whose URL is configured in the website.
 2. Open **SQL Editor** and create a new query.
-3. Run the SQL files in `migrations/` in filename order: first `202611060001_initial_schema.sql`, then `202611060002_seed_portfolio_projects.sql`, then `202611060003_repair_form_management_permissions.sql` to import the existing gallery entries into the editable `projects` table.
+3. Run the SQL files in `migrations/` in filename order: `202611060001_initial_schema.sql`, `202611060002_seed_portfolio_projects.sql`, `202611060003_repair_form_management_permissions.sql`, then `202611060004_full_admin_permissions_and_scenario_application.sql`. Migration 004 repairs write policies across all admin-managed areas and replaces the staff application with scenario-based questions that do not ask applicants to choose a role. It preserves the form's existing publication status.
 4. Inspect **Table Editor** and **Authentication**. The gallery is now database-driven rather than mixing hard-coded and database records.
 
 Do not run this against the JPN Supabase project.
