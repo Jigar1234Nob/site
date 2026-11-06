@@ -6,7 +6,7 @@ This is a standalone Supabase project for the jigar.au portfolio website. It is 
 
 - Website profiles and staff roles
 - Forms and private form submissions
-- Public portfolio projects
+- Public portfolio projects, with existing gallery entries imported by the second migration
 - Contact enquiries
 - Public/private site settings
 - Read-only staff audit log access
@@ -15,8 +15,8 @@ This is a standalone Supabase project for the jigar.au portfolio website. It is 
 
 1. Open the Supabase dashboard for the project whose URL is configured in the website.
 2. Open **SQL Editor** and create a new query.
-3. Copy the contents of `migrations/202611060001_initial_schema.sql` from this repository.
-4. Run it once, then inspect **Table Editor** and **Authentication**.
+3. Run the SQL files in `migrations/` in filename order: first `202611060001_initial_schema.sql`, then `202611060002_seed_portfolio_projects.sql` to import the existing gallery entries into the editable `projects` table.
+4. Inspect **Table Editor** and **Authentication**. The gallery is now database-driven rather than mixing hard-coded and database records.
 
 Do not run this against the JPN Supabase project.
 
@@ -99,6 +99,6 @@ The project configuration is in `supabase/config.toml`. Supabase provides the se
 - Apply the SQL migration before using the database-backed pages.
 - Configure Auth Site URL and redirect URLs for `https://jigar.au/account/`.
 - Configure SMTP and test confirmation and password recovery emails.
-- Deploy the `admin-users` Edge Function before using Auth account controls.
+- Deploy the updated `admin-users` Edge Function before using Auth account controls. Redeploy after pulling the latest changes so the CORS fix is active.
 - Add a managed CAPTCHA/Turnstile verification and server-side rate limiting to public forms and contact submissions before promoting them broadly. The included honeypot is only a basic spam deterrent, not a substitute for server-side abuse protection.
 - Test a new member, editor, administrator, anonymous form submission, contact enquiry, password reset, and account disable/enable flow.
