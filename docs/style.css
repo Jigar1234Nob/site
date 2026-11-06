@@ -267,3 +267,8 @@ html[data-theme="dark"] .rack-glow{background:radial-gradient(circle,#bd28602b,t
 
 /* Public form and contact pages */
 .public-form-page{min-height:calc(100vh - 120px);padding:60px 18px 80px;width:min(780px,100%);margin:0 auto}.public-form-intro{margin-bottom:28px}.public-form-intro h1{font-size:clamp(38px,6vw,62px);letter-spacing:-.06em;line-height:1.03;margin:0 0 12px}.public-form-intro h1::first-letter{color:var(--blue)}.public-form-intro>p:last-child{color:var(--muted);line-height:1.6}.public-form-card{padding:clamp(20px,4vw,36px);border:1px solid var(--line);border-radius:22px;background:var(--panel);display:grid;gap:18px;box-shadow:0 20px 70px #0000000a}.public-field{display:grid;gap:8px;font-size:12px;font-weight:650}.public-field input,.public-field textarea,.public-field select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:var(--text);font:inherit;font-size:14px}.public-field textarea{resize:vertical;line-height:1.55}.public-field input:focus,.public-field textarea:focus,.public-field select:focus{outline:2px solid var(--blue);outline-offset:1px}.public-check{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.5}.public-check input{margin-top:2px}.form-privacy{margin:0;color:var(--muted);font-size:10px;line-height:1.5}.form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+
+
+/* Jigar.au brand motto */
+.site-motto{margin:15px auto 0;color:var(--blue);font-size:clamp(16px,2vw,20px);font-weight:650;letter-spacing:-.025em}.footer-motto{color:var(--blue);font-size:12px;font-weight:650;letter-spacing:-.015em;text-align:center}
+@media(max-width:760px){.footer-motto{text-align:left}}
