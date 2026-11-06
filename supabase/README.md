@@ -71,3 +71,33 @@ Before testing the website account page, configure the standalone Supabase proje
 6. Apply the SQL migration before testing staff roles or the admin route. Without the migration, authentication itself may work, but the profile/role database features will not.
 
 Public registration does not grant staff access. The first administrator must still be assigned manually using the SQL instructions above.
+
+
+## Current website features
+
+- Account page: registration, email/password sign-in, email confirmation flow, password reset/recovery, sign-out, and profile display-name editing.
+- Admin workspace: overview counts, profiles, staff roles, form builder, submission review and status notes, project CRUD/publishing, contact inbox/status notes, JSON site settings, and audit-log viewer.
+- Public forms: dynamic rendering from the published form definition and private response submission.
+- Public contact page: inserts enquiries into the private contact inbox.
+- Project gallery: additionally loads published project records from Supabase.
+- Secure Auth user actions: the `admin-users` Edge Function provides administrator-only Auth user listing, disable/enable, and deletion. It must be deployed separately before those controls become available.
+
+## Deploy the protected Auth management function
+
+From the repository root, with the Supabase CLI installed:
+
+```sh
+supabase link --project-ref kvltejnjvpzkyynlzyaa
+supabase functions deploy admin-users
+```
+
+The function uses the Supabase server environment and a server-side service-role key. If the project requires you to set it explicitly, use the Supabase dashboard's Edge Function secrets interface. Never put that key in this repository or the website. The function checks the caller's JWT and requires the `admin` role before it lists, disables, enables, or deletes Auth accounts. Account deletion is irreversible.
+
+## Production readiness checklist
+
+- Apply the SQL migration before using the database-backed pages.
+- Configure Auth Site URL and redirect URLs for `https://jigar.au/account/`.
+- Configure SMTP and test confirmation and password recovery emails.
+- Deploy the `admin-users` Edge Function before using Auth account controls.
+- Add a managed CAPTCHA/Turnstile verification and server-side rate limiting to public forms and contact submissions before promoting them broadly. The included honeypot is only a basic spam deterrent, not a substitute for server-side abuse protection.
+- Test a new member, editor, administrator, anonymous form submission, contact enquiry, password reset, and account disable/enable flow.
