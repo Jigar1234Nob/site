@@ -24,12 +24,12 @@ values
     'A Minecraft community server with Java and Bedrock cross-play, community spaces and ongoing server administration.',
     'A Minecraft community server with Java and Bedrock cross-play, community spaces and ongoing server administration.',
     'https://spcitclub.me',
-    'https://discord.gg/spcitclubmc',
+    null,
     'Community & Games',
     'live',
     true,
     20,
-    '{"tags":["Minecraft","Java + Bedrock","Community"],"visual_class":"spc-visual","glyph":"SPC"}'::jsonb
+    '{"tags":["Minecraft","Java + Bedrock","Community"],"visual_class":"spc-visual","glyph":"SPC","links":[{"label":"Join Discord ↗","url":"https://discord.gg/spcitclubmc"}]}'::jsonb
   ),
   (
     'personal-portfolio',
@@ -102,12 +102,12 @@ values
     'Video and streaming spaces for creative content, with channels on YouTube and Twitch.',
     'Video and streaming spaces for creative content, with channels on YouTube and Twitch.',
     'https://www.youtube.com/@VersatileFoundation',
-    'https://twitch.tv/versatilefoundation',
+    null,
     'Music & Media',
     'live',
     true,
     80,
-    '{"tags":["YouTube","Twitch","Media"],"visual_class":"media-visual","glyph":"▶"}'::jsonb
+    '{"tags":["YouTube","Twitch","Media"],"visual_class":"media-visual","glyph":"▶","links":[{"label":"Twitch ↗","url":"https://twitch.tv/versatilefoundation"}]}'::jsonb
   )
 on conflict (slug) do nothing;
 
