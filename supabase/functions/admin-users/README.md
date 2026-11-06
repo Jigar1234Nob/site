@@ -6,9 +6,10 @@ This function is required for administrator-only Auth account actions (list Auth
 
 Install and sign in to the Supabase CLI, link the standalone jigar.au project, then run:
 
-```sh
-supabase secrets set SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
-supabase functions deploy admin-users
+```powershell
+npx supabase@latest login
+npx supabase@latest link --project-ref kvltejnjvpzkyynlzyaa
+npx supabase@latest functions deploy admin-users
 ```
 
 Supabase injects `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` into Edge Functions. Do not attempt to set reserved `SUPABASE_` variables as custom secrets. Never commit credentials or paste service-role keys into frontend files.
