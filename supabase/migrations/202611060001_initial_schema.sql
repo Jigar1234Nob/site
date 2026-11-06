@@ -235,6 +235,10 @@ create policy "submissions_insert_open_form" on public.form_submissions
 for insert to anon, authenticated
 with check (
   (user_id is null or user_id = (select auth.uid()))
+  and status = 'new'
+  and reviewed_at is null
+  and reviewed_by is null
+  and internal_notes is null
   and exists (
     select 1 from public.forms f
     where f.id = form_id
@@ -277,6 +281,9 @@ with check (
   length(trim(name)) between 1 and 120
   and length(trim(email)) between 3 and 254
   and length(trim(message)) between 1 and 10000
+  and status = 'new'
+  and reviewed_at is null
+  and internal_notes is null
 );
 
 drop policy if exists "contact_admin_read" on public.contact_messages;
