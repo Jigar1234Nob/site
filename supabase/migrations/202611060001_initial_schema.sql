@@ -347,13 +347,16 @@ using ((select public.is_site_admin()));
 
 -- Explicit grants complement RLS. No anon access to private records.
 grant usage on schema public to anon, authenticated;
-grant select, insert on public.forms to anon, authenticated;
-grant update, delete on public.forms to authenticated;
-grant select, insert on public.form_submissions to anon, authenticated;
-grant update on public.form_submissions to authenticated;
-grant select, insert, update, delete on public.projects to anon, authenticated;
-grant select, insert, update on public.contact_messages to anon, authenticated;
-grant select, insert, update, delete on public.site_settings to anon, authenticated;
+grant select on public.forms to anon, authenticated;
+grant insert, update, delete on public.forms to authenticated;
+grant insert on public.form_submissions to anon, authenticated;
+grant select, update on public.form_submissions to authenticated;
+grant select on public.projects to anon, authenticated;
+grant insert, update, delete on public.projects to authenticated;
+grant insert on public.contact_messages to anon, authenticated;
+grant select, update on public.contact_messages to authenticated;
+grant select on public.site_settings to anon, authenticated;
+grant insert, update, delete on public.site_settings to authenticated;
 grant select on public.profiles to authenticated;
 grant update (display_name) on public.profiles to authenticated;
 grant select, insert, update, delete on public.user_roles to authenticated;
