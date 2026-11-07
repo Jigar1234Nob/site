@@ -1,5 +1,5 @@
 -- Public forms visibility and submission rules.
--- Open forms appear in the main list. Archived forms remain visible and accept responses.
+-- Open forms appear in the main list and accept responses. Archived forms are view-only.
 -- Closed and draft forms are hidden and cannot receive submissions.
 begin;
 
@@ -24,7 +24,7 @@ with check (
     select 1
     from public.forms f
     where f.id = form_id
-      and f.status in ('open', 'archived')
+      and f.status = 'open'
       and (f.allow_anonymous or user_id is not null)
   )
 );
