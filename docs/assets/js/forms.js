@@ -13,11 +13,11 @@ const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
 function formCard(form, archived = false) {
   return `<article class="public-form-list-card">
     <div class="public-form-card-top">
-      <span class="public-form-status ${archived ? "archived" : "open"}">${archived ? "Archived · Still accepting responses" : "Open"}</span>
+      <span class="public-form-status ${archived ? "archived" : "open"}">${archived ? "Archived · View only" : "Open"}</span>
     </div>
     <h2>${esc(form.title)}</h2>
-    <p>${esc(form.description || "Complete this form to submit your response.")}</p>
-    <a class="account-submit public-form-open-link" href="/forms/?slug=${encodeURIComponent(form.slug)}">${archived ? "Complete archived form" : "Open form"} <span aria-hidden="true">→</span></a>
+    <p>${esc(form.description || "View the form details.")}</p>
+    <a class="account-submit public-form-open-link" href="/forms/?slug=${encodeURIComponent(form.slug)}">${archived ? "View archived form" : "Open form"} <span aria-hidden="true">→</span></a>
   </article>`;
 }
 
@@ -46,7 +46,7 @@ async function renderListing() {
       <div class="public-form-list">${openForms.length ? openForms.map((form) => formCard(form)).join("") : '<p class="public-form-empty">There are no open forms right now.</p>'}</div>
     </section>
     <section class="public-form-section archived-section" aria-labelledby="archived-forms-heading">
-      <div class="public-form-section-heading"><div><p class="kicker">PREVIOUSLY LISTED</p><h2 id="archived-forms-heading">Archived forms</h2><p>Archived forms remain available for submissions until they are closed.</p></div><span class="public-form-count">${archivedForms.length}</span></div>
+      <div class="public-form-section-heading"><div><p class="kicker">PREVIOUSLY LISTED</p><h2 id="archived-forms-heading">Archived forms</h2><p>Archived forms can still be viewed, but submissions are disabled.</p></div><span class="public-form-count">${archivedForms.length}</span></div>
       <div class="public-form-list">${archivedForms.length ? archivedForms.map((form) => formCard(form, true)).join("") : '<p class="public-form-empty">There are no archived forms.</p>'}</div>
     </section>`;
 }
@@ -97,7 +97,7 @@ async function renderForm() {
 
   const fields = form.definition?.fields || [];
   const archivedNotice = form.status === "archived"
-    ? '<p class="public-form-archived-notice">This form is archived, but submissions are still being accepted.</p>'
+    ? '<p class="public-form-archived-notice">This form is archived and available to view only. Submissions are closed.</p>'
     : "";
 
   root.innerHTML = `
@@ -109,13 +109,15 @@ async function renderForm() {
       <p>${esc(form.description || "Complete the form below. Required fields are marked.")}</p>
       <p class="form-privacy">Your response is visible only to authorised site staff and, when signed in, your account.</p>
     </div>
-    <form id="submission-form" class="public-form-card">
+    ${form.status === "archived" ? `<section class="public-form-card" aria-label="Archived form responses">${fields.map((field) => fieldHtml({...field, required: false})).join("")}<p class="form-privacy">This archived form is read-only. Responses are no longer accepted.</p></section>` : `<form id="submission-form" class="public-form-card">
       <div id="form-status" class="account-status" role="status" hidden></div>
       ${fields.map(fieldHtml).join("")}
       <label class="form-honeypot" aria-hidden="true">Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label>
       <button class="account-submit" type="submit">Submit response</button>
       <p class="form-privacy">Please do not include passwords, authentication codes or unnecessary sensitive information.</p>
-    </form>`;
+    </form>`}`;
+
+  if (form.status !== "open") return;
 
   $("#submission-form").addEventListener("submit", async (event) => {
     event.preventDefault();
