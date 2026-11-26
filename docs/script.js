@@ -99,7 +99,7 @@ if(galleryRoot){
 
 // Jigar.au Help UI (Chatwoot)
 (() => {
-  const BASE_URL = "https://jigar.au";
+  const BASE_URL = "https://support.jigar.au";
   const script = document.createElement("script");
   script.src = BASE_URL + "/packs/js/sdk.js";
   script.async = true;
