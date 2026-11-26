@@ -79,3 +79,19 @@ if(galleryRoot){
     footer.appendChild(link);
   });
 })();
+
+
+// Jigar.au Help UI (Chatwoot)
+(() => {
+  const BASE_URL = "https://jigar.au";
+  const script = document.createElement("script");
+  script.src = BASE_URL + "/packs/js/sdk.js";
+  script.async = true;
+  script.onload = () => {
+    window.chatwootSDK.run({
+      websiteToken: "s7wjg4SS3Q6KoK7KWenjy6Dw",
+      baseUrl: BASE_URL
+    });
+  };
+  document.head.appendChild(script);
+})();
